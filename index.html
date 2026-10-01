@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AURA WEB</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    font-family:Arial,sans-serif;
+}
+
+
+/* ==================================================
+   HOME
+================================================== */
+
+#home{
+    width:100%;
+    height:100dvh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #222 0%,
+            #090909 50%,
+            #000 100%
+        );
+
+    color:white;
+    text-align:center;
+}
+
+.warningBox{
+    width:100%;
+    max-width:500px;
+
+    padding:35px;
+
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:20px;
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 0 50px rgba(255,170,50,.08);
+}
+
+.warningBox h1{
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+.warningBox p{
+    color:#aaa;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.mainButton{
+    border:none;
+
+    padding:15px 35px;
+
+    border-radius:10px;
+
+    background:#fff;
+    color:#000;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.mainButton:hover{
+    transform:scale(1.05);
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,.4);
+}
+
+
+/* ==================================================
+   FAKE LOADING
+================================================== */
+
+#scamScreen{
+    display:none;
+
+    width:100%;
+    height:100dvh;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:#020202;
+
+    color:#00ff88;
+
+    font-family:monospace;
+}
+
+.scamBox{
+    width:100%;
+    max-width:650px;
+}
+
+.scamTitle{
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.status{
+    margin-bottom:15px;
+    color:#aaa;
+}
+
+.progressBox{
+    width:100%;
+    height:10px;
+
+    background:#222;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    margin-bottom:12px;
+}
+
+#progress{
+    width:0%;
+    height:100%;
+
+    background:#00ff88;
+
+    box-shadow:
+        0 0 15px #00ff88;
+}
+
+#percent{
+    text-align:right;
+}
+
+#fakeAccess{
+    display:none;
+
+    margin-top:30px;
+
+    color:#00ff88;
+
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+
+    50%{
+        opacity:.3;
+    }
+
+}
+
+
+/* ==================================================
+   VIDEO
+================================================== */
+
+#videoScene{
+    display:none;
+
+    position:relative;
+
+    width:100vw;
+    height:100dvh;
+
+    background:#000;
+
+    overflow:hidden;
+}
+
+
+/*
+   VIDEO TETAP PROPORSIONAL
+*/
+
+#video{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    object-position:center center;
+}
+
+
+/* ==================================================
+   VIDEO EFFECT
+================================================== */
+
+.colorGrade{
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,170,70,.08),
+            rgba(0,0,0,.10),
+            rgba(0,0,0,.45)
+        );
+
+    mix-blend-mode:screen;
+}
+
+
+.goldenGlow{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:80%;
+    height:80%;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:2;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,180,70,.22),
+            transparent 65%
+        );
+
+    filter:blur(45px);
+
+    mix-blend-mode:screen;
+
+    animation:
+        goldenPulse 3s ease-in-out infinite;
+}
+
+@keyframes goldenPulse{
+
+    0%,100%{
+        opacity:.4;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    50%{
+        opacity:.8;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.08);
+    }
+
+}
+
+
+/* ==================================================
+   LIGHT
+================================================== */
+
+.lightFlare{
+    position:absolute;
+
+    width:35%;
+    height:35%;
+
+    left:50%;
+    top:35%;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:3;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,220,.25),
+            transparent 70%
+        );
+
+    filter:blur(30px);
+
+    mix-blend-mode:screen;
+
+    animation:
+        flareMove 5s ease-in-out infinite;
+}
+
+@keyframes flareMove{
+
+    0%,100%{
+        opacity:.25;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.9);
+    }
+
+    50%{
+        opacity:.6;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.15);
+    }
+
+}
+
+
+/* ==================================================
+   VIGNETTE
+================================================== */
+
+.vignette{
+    position:absolute;
+
+    inset:0;
+
+    z-index:4;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            ellipse,
+            transparent 45%,
+            rgba(0,0,0,.3) 75%,
+            rgba(0,0,0,.8) 100%
+        );
+}
+
+
+/* ==================================================
+   FILM GRAIN
+================================================== */
+
+.filmGrain{
+    position:absolute;
+
+    inset:-50%;
+
+    z-index:5;
+
+    pointer-events:none;
+
+    opacity:.06;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+
+    animation:
+        grain .15s steps(2) infinite;
+}
+
+@keyframes grain{
+
+    0%{
+        transform:translate(0,0);
+    }
+
+    25%{
+        transform:translate(2%,-2%);
+    }
+
+    50%{
+        transform:translate(-2%,2%);
+    }
+
+    75%{
+        transform:translate(2%,2%);
+    }
+
+    100%{
+        transform:translate(-2%,-2%);
+    }
+
+}
+
+
+/* ==================================================
+   PARTICLES
+================================================== */
+
+.particles{
+    position:absolute;
+
+    inset:0;
+
+    z-index:6;
+
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.5) 1px,
+            transparent 1px
+        );
+
+    background-size:90px 90px;
+
+    opacity:.15;
+
+    animation:
+        particleMove 12s linear infinite;
+}
+
+@keyframes particleMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-90px);
+    }
+
+}
+
+
+/* ==================================================
+   AURA
+================================================== */
+
+#auraScene{
+    display:none;
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:20;
+
+    pointer-events:none;
+}
+
+
+.auraRing{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:220px;
+    height:220px;
+
+    transform:
+        translate(-50%,-50%);
+
+    border:
+        2px solid
+        rgba(255,220,150,.65);
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 20px rgba(255,180,80,.5),
+        0 0 70px rgba(255,150,40,.25);
+
+    animation:
+        auraRing 3s ease-in-out infinite;
+}
+
+@keyframes auraRing{
+
+    0%,100%{
+        transform:
+            translate(-50%,-50%)
+            scale(.85);
+
+        opacity:.25;
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.2);
+
+        opacity:.8;
+    }
+
+}
+
+
+/* ==================================================
+   SYMBOL
+================================================== */
+
+.auraSymbol{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    color:#ffe2a8;
+
+    font-size:30px;
+
+    text-shadow:
+        0 0 15px
+        rgba(255,180,80,.9);
+
+    animation:
+        symbolFloat 3s ease-in-out infinite;
+}
+
+.symbol1{
+    margin-left:-180px;
+    margin-top:-100px;
+}
+
+.symbol2{
+    margin-left:150px;
+    margin-top:-80px;
+}
+
+.symbol3{
+    margin-left:-150px;
+    margin-top:120px;
+}
+
+.symbol4{
+    margin-left:140px;
+    margin-top:110px;
+}
+
+@keyframes symbolFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity:.4;
+    }
+
+    50%{
+        transform:
+            translateY(-20px)
+            rotate(20deg);
+
+        opacity:1;
+    }
+
+}
+
+
+/* ==================================================
+   AURA TEXT
+================================================== */
+
+#auraText{
+
+    position:absolute;
+
+    left:50%;
+    top:70%;
+
+    width:100%;
+
+    transform:
+        translateX(-50%);
+
+    color:white;
+
+    font-size:
+        clamp(
+            35px,
+            8vw,
+            90px
+        );
+
+    font-weight:900;
+
+    letter-spacing:8px;
+
+    text-align:center;
+
+    text-shadow:
+
+        0 0 10px
+        rgba(255,255,255,.8),
+
+        0 0 30px
+        rgba(255,180,70,.8),
+
+        0 0 70px
+        rgba(255,120,20,.6);
+
+    animation:
+        auraText 2s ease-out forwards;
+}
+
+@keyframes auraText{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translateX(-50%)
+            scale(.5);
+
+        filter:blur(20px);
+    }
+
+    100%{
+        opacity:1;
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+        filter:blur(0);
+    }
+
+}
+
+
+/* ==================================================
+   KHUSUS HP
+================================================== */
+
+@media (max-width:600px){
+
+    .warningBox{
+        width:100%;
+        padding:28px 20px;
+    }
+
+    .warningBox h1{
+        font-size:25px;
+    }
+
+    .warningBox p{
+        font-size:14px;
+    }
+
+    .mainButton{
+        width:100%;
+        padding:16px;
+    }
+
+
+    .scamBox{
+        width:90%;
+    }
+
+    .scamTitle{
+        font-size:20px;
+    }
+
+    .status{
+        font-size:13px;
+    }
+
+
+    /* VIDEO HP */
+
+    #videoScene{
+        width:100vw;
+        height:100dvh;
+    }
+
+    #video{
+        width:100%;
+        height:100%;
+
+        object-fit:cover;
+        object-position:center center;
+    }
+
+
+    /* AURA HP */
+
+    .auraRing{
+        width:160px;
+        height:160px;
+    }
+
+    .auraSymbol{
+        font-size:22px;
+    }
+
+    .symbol1{
+        margin-left:-120px;
+        margin-top:-80px;
+    }
+
+    .symbol2{
+        margin-left:100px;
+        margin-top:-60px;
+    }
+
+    .symbol3{
+        margin-left:-100px;
+        margin-top:90px;
+    }
+
+    .symbol4{
+        margin-left:90px;
+        margin-top:80px;
+    }
+
+    #auraText{
+        top:72%;
+
+        font-size:42px;
+
+        letter-spacing:4px;
+    }
+
+}
+
+
+/* ==================================================
+   HP LANDSCAPE
+================================================== */
+
+@media (max-width:600px) and (orientation:landscape){
+
+    #auraText{
+        top:75%;
+        font-size:34px;
+    }
+
+    .auraRing{
+        width:150px;
+        height:150px;
+    }
+
+}
+
+
+/* ==================================================
+   HP KECIL
+================================================== */
+
+@media (max-width:380px){
+
+    .warningBox h1{
+        font-size:22px;
+    }
+
+    .warningBox p{
+        font-size:13px;
+    }
+
+    #auraText{
+        font-size:34px;
+        letter-spacing:2px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HOME
+================================================== -->
+
+<div id="home">
+
+    <div class="warningBox">
+
+        <h1>⚠️ SYSTEM NOTICE</h1>
+
+        <p>
+            This page contains a highly classified
+            visual experience.
+            <br><br>
+            Continue only if you are ready.
+        </p>
+
+        <button
+            class="mainButton"
+            onclick="klikTombol()"
+        >
+            CONTINUE
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     LOADING
+================================================== -->
+
+<div id="scamScreen">
+
+    <div class="scamBox">
+
+        <div class="scamTitle">
+            SYSTEM ACCESS
+        </div>
+
+        <div class="status" id="status">
+            Establishing secure connection...
+        </div>
+
+        <div class="progressBox">
+
+            <div id="progress"></div>
+
+        </div>
+
+        <div id="percent">
+            0%
+        </div>
+
+        <div id="fakeAccess">
+            ACCESS GRANTED ✓
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     VIDEO
+================================================== -->
+
+<div id="videoScene">
+
+    <video
+        id="video"
+        playsinline
+        preload="auto"
+    >
+
+        <source
+            src="video.mp4"
+            type="video/mp4"
+        >
+
+    </video>
+
+
+    <!-- ==================================================
+         AUDIO
+    ================================================== -->
+
+    <audio
+        id="lagu"
+        preload="auto"
+    >
+
+        <source
+            src="lagu.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- EFFECT -->
+
+    <div class="colorGrade"></div>
+
+    <div class="goldenGlow"></div>
+
+    <div class="lightFlare"></div>
+
+    <div class="vignette"></div>
+
+    <div class="filmGrain"></div>
+
+    <div class="particles"></div>
+
+
+
+    <!-- ==================================================
+         AURA
+    ================================================== -->
+
+    <div id="auraScene">
+
+        <div class="auraRing"></div>
+
+        <div class="auraSymbol symbol1">
+            ✦
+        </div>
+
+        <div class="auraSymbol symbol2">
+            ◈
+        </div>
+
+        <div class="auraSymbol symbol3">
+            ✧
+        </div>
+
+        <div class="auraSymbol symbol4">
+            ✦
+        </div>
+
+        <div id="auraText">
+            AURA +9999
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* ==================================================
+   TOMBOL
+================================================== */
+
+function klikTombol(){
+
+    const home =
+        document.getElementById("home");
+
+    const scam =
+        document.getElementById("scamScreen");
+
+    const videoScene =
+        document.getElementById("videoScene");
+
+    const video =
+        document.getElementById("video");
+
+    const lagu =
+        document.getElementById("lagu");
+
+    const progress =
+        document.getElementById("progress");
+
+    const percent =
+        document.getElementById("percent");
+
+    const status =
+        document.getElementById("status");
+
+    const access =
+        document.getElementById("fakeAccess");
+
+    const auraScene =
+        document.getElementById("auraScene");
+
+
+    /* ==================================================
+       HOME HILANG
+    ================================================== */
+
+    home.style.display = "none";
+
+    scam.style.display = "flex";
+
+
+    /* ==================================================
+       AUDIO
+       LANGSUNG DIPUTAR SAAT KLIK
+    ================================================== */
+
+    lagu.pause();
+
+    lagu.currentTime = 0;
+
+    lagu.volume = 1;
+
+    lagu.muted = false;
+
+
+    const playAudio =
+        lagu.play();
+
+
+    if(playAudio){
+
+        playAudio.catch(function(error){
+
+            console.log(
+                "Audio error:",
+                error
+            );
+
+        });
+
+    }
+
+
+    /* ==================================================
+       LOADING PALSU
+    ================================================== */
+
+    let angka = 0;
+
+
+    const loading =
+        setInterval(function(){
+
+            angka +=
+                Math.floor(
+                    Math.random() * 12
+                ) + 5;
+
+
+            if(angka >= 100){
+
+                angka = 100;
+
+                clearInterval(
+                    loading
+                );
+
+
+                status.innerText =
+                    "Connection established.";
+
+
+                access.style.display =
+                    "block";
+
+
+                setTimeout(function(){
+
+                    scam.style.display =
+                        "none";
+
+
+                    videoScene.style.display =
+                        "block";
+
+
+                    video.currentTime = 0;
+
+
+                    const playVideo =
+                        video.play();
+
+
+                    if(playVideo){
+
+                        playVideo.catch(
+                            function(error){
+
+                                console.log(
+                                    "Video error:",
+                                    error
+                                );
+
+                            }
+                        );
+
+                    }
+
+
+                    /* ==================================================
+                       AURA MUNCUL
+                    ================================================== */
+
+                    setTimeout(function(){
+
+                        auraScene.style.display =
+                            "block";
+
+                    },1500);
+
+
+                },700);
+
+            }
+
+
+            progress.style.width =
+                angka + "%";
+
+
+            percent.innerText =
+                angka + "%";
+
+
+        },180);
+
+}
+
+</script>
+
+</body>
+</html>
